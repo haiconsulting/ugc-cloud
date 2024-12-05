@@ -27,13 +27,23 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Create placeholder images
+        run: |
+          touch public/favicon.ico
+          convert -size 192x192 xc:transparent public/logo192.png
+          convert -size 512x512 xc:transparent public/logo512.png
+        continue-on-error: true
+
       - name: Build application
         run: npm run build
         env:
+          CI: false
+          PUBLIC_URL: "/${{ github.event.repository.name }}"
           REACT_APP_OPENAI_API_KEY: ${{ secrets.REACT_APP_OPENAI_API_KEY }}
           REACT_APP_UNSPLASH_ACCESS_KEY: ${{ secrets.REACT_APP_UNSPLASH_ACCESS_KEY }}
           REACT_APP_TINYMCE_API_KEY: ${{ secrets.REACT_APP_TINYMCE_API_KEY }}

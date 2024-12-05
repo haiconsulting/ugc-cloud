@@ -1,0 +1,4 @@
+<IfModule mod_mime.c>
+    AddType application/manifest+json    webmanifest
+    AddType application/manifest+json    json
+</IfModule> 
