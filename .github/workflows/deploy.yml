@@ -49,7 +49,7 @@ jobs:
         run: npm run build
         env:
           CI: false
-          PUBLIC_URL: "."
+          PUBLIC_URL: "/ugc-cloud"
           REACT_APP_OPENAI_API_KEY: ${{ secrets.REACT_APP_OPENAI_API_KEY }}
           REACT_APP_UNSPLASH_ACCESS_KEY: ${{ secrets.REACT_APP_UNSPLASH_ACCESS_KEY }}
           REACT_APP_TINYMCE_API_KEY: ${{ secrets.REACT_APP_TINYMCE_API_KEY }}

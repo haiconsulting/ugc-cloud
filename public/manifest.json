@@ -1,7 +1,7 @@
 {
   "name": "UGC Cloud",
   "short_name": "UGC",
-  "start_url": ".",
+  "start_url": "/ugc-cloud/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
