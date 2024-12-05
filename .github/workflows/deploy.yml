@@ -32,11 +32,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create placeholder images
+      - name: Install ImageMagick
+        run: sudo apt-get install -y imagemagick
+
+      - name: Create icon directory and placeholder images
         run: |
-          touch public/favicon.ico
-          convert -size 192x192 xc:transparent public/logo192.png
-          convert -size 512x512 xc:transparent public/logo512.png
+          mkdir -p public/icon
+          convert -size 64x64 xc:transparent public/icon/favicon.ico
+          convert -size 192x192 xc:transparent public/icon/logo192.png
+          convert -size 192x192 xc:transparent public/icon/logo192.webp
+          convert -size 512x512 xc:transparent public/icon/logo512.png
+          convert -size 512x512 xc:transparent public/icon/logo512.webp
         continue-on-error: true
 
       - name: Build application
