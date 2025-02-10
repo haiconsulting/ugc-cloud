@@ -73,12 +73,14 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
       >
-        <img 
-          src={`${process.env.PUBLIC_URL}/favicon.ico`} 
-          alt="UGC Cloud Logo" 
-          className="nav-logo"
-        />
-        <h1>UGC Cloud</h1>
+        <Link to="/" className="brand-link">
+          <img 
+            src={`${process.env.PUBLIC_URL}/favicon.ico`} 
+            alt="UGC Cloud Logo" 
+            className="nav-logo"
+          />
+          <h1>UGC Cloud</h1>
+        </Link>
       </motion.div>
 
       <div className="nav-links">

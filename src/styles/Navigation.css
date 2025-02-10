@@ -1,0 +1,58 @@
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 1rem;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .logo-container {
+        flex: 1;
+    }
+
+    .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;  /* Reduced gap for better mobile spacing */
+    }
+
+    .dark-mode-toggle {
+        margin-right: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    .menu-icon {
+        position: relative;
+        z-index: 1;
+        margin-left: 0.5rem;  /* Add space between dark mode toggle and menu */
+    }
+
+    .home-button {
+        font-size: 1.25rem;
+    }
+
+    .home-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.home-button {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    margin-right: 0.5rem;  /* Add space between home button and dark mode toggle */
+}
+
+.home-button:hover {
+    color: var(--primary-color);
+}
+
+.home-icon {
+    width: 24px;
+    height: 24px;
+} 

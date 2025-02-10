@@ -155,4 +155,17 @@
 
 .nav-hidden {
   transform: translateY(-100%);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.brand-link:hover {
+  text-decoration: none;
+  color: var(--text-primary);
 } 
