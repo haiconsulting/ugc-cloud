@@ -76,7 +76,9 @@ const UGCChatbot = () => {
     "What equipment do I need to start?",
     "Tips for negotiating with brands",
     "Best practices for TikTok UGC",
-    "How to create a UGC portfolio"
+    "How to create a UGC portfolio",
+    "How to find clients?",
+    "Help me with my content strategy"
   ];
 
   const handleSuggestionClick = (suggestion) => {

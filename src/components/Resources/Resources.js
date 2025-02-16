@@ -10,6 +10,7 @@ const Resources = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedResource, setSelectedResource] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   // Load resources from local storage on component mount
   useEffect(() => {
@@ -55,6 +56,95 @@ const Resources = () => {
         }
       }
     }
+  };
+
+  const handlePreview = (template) => {
+    // Create a new window/tab with the template preview
+    const previewWindow = window.open('', '_blank');
+    previewWindow.document.write(template.content || 'Preview not available');
+    previewWindow.document.close();
+  };
+
+  const handleDownload = (template) => {
+    // Create a blob with the template content
+    const blob = new Blob([template.content || ''], { type: 'text/html' });
+    const url = window.URL.createObjectURL(blob);
+    
+    // Create a temporary link element and trigger the download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = template.fileName || 'template.html';
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const categories = [
+    { id: 'all', label: 'All' },
+    { id: 'templates', label: 'Templates' },
+    { id: 'courses', label: 'Courses' },
+    { id: 'assets', label: 'Assets' }
+  ];
+
+  const emailTemplates = [
+    {
+      id: 1,
+      title: "Professional Outreach Template",
+      description: "A professional template for reaching out to potential clients",
+      fileName: "outreach-template.html",
+      category: "templates",
+      type: "email",
+      content: `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Outreach Template</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6;">
+    <table cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto;">
+        <tr>
+            <td style="padding: 20px;">
+                <h2 style="color: #333;">Professional Outreach</h2>
+                <p style="color: #666;">Your template content here...</p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`
+    },
+    // Add your other templates here
+  ];
+
+  const renderEmailTemplate = (template) => {
+    return (
+      <motion.div 
+        key={template.id}
+        className="template-card"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <h3>{template.title}</h3>
+        <p>{template.description}</p>
+        <div className="template-actions">
+          <button 
+            className="preview-btn"
+            onClick={() => handlePreview(template)}
+          >
+            Preview
+          </button>
+          <button 
+            className="download-btn"
+            onClick={() => handleDownload(template)}
+          >
+            Download HTML
+          </button>
+        </div>
+      </motion.div>
+    );
   };
 
   return (

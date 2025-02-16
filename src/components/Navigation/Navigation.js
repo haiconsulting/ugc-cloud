@@ -75,11 +75,10 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
       >
         <Link to="/" className="brand-link">
           <img 
-            src={`${process.env.PUBLIC_URL}/favicon.ico`} 
+            src={`${process.env.PUBLIC_URL}/logo.png`} 
             alt="UGC Cloud Logo" 
             className="nav-logo"
           />
-          <h1>UGC Cloud</h1>
         </Link>
       </motion.div>
 

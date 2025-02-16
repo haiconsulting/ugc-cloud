@@ -179,4 +179,43 @@
 .import-btn:hover {
   background: var(--primary-blue);
   transform: translateY(-2px);
+}
+
+/* Add these new styles */
+.template-card {
+  background: var(--card-background);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.template-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.preview-btn, .download-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.preview-btn {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.download-btn {
+  background: var(--secondary-color);
+  color: var(--text-primary);
+}
+
+.preview-btn:hover, .download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 } 
