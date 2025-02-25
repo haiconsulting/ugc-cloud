@@ -695,3 +695,113 @@ label {
 .toast.info {
   border-left: 4px solid var(--accent-color);
 }
+
+.App.dark-mode::before,
+.App.dark-mode::after,
+.App.dark-mode .cloud-layer {
+  opacity: 0.3;
+  filter: brightness(0.7);
+}
+
+.App.dark-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M280,200 C280,140 240,100 180,100 C140,100 100,120 80,160 C40,160 0,180 0,220 C0,260 40,280 80,280 L280,280 C320,280 360,260 360,220 C360,180 320,160 280,200 Z' fill='%23333' fill-opacity='0.8'/%3E%3Cline x1='80' y1='280' x2='80' y2='320' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='120' y1='280' x2='120' y2='340' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='160' y1='280' x2='160' y2='330' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='200' y1='280' x2='200' y2='350' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='240' y1='280' x2='240' y2='320' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='280' y1='280' x2='280' y2='340' stroke='%2366a6ff' stroke-width='3'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 60s linear infinite;
+  background-size: 400px 400px;
+  top: 10%;
+}
+
+.App.dark-mode::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M140,100 C140,70 120,50 90,50 C70,50 50,60 40,80 C20,80 0,90 0,110 C0,130 20,140 40,140 L140,140 C160,140 180,130 180,110 C180,90 160,80 140,100 Z' fill='%23444' fill-opacity='0.8'/%3E%3Cline x1='40' y1='140' x2='40' y2='170' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='60' y1='140' x2='60' y2='180' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='80' y1='140' x2='80' y2='165' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='100' y1='140' x2='100' y2='175' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='120' y1='140' x2='120' y2='160' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='140' y1='140' x2='140' y2='170' stroke='%2366a6ff' stroke-width='2'/%3E%3C/svg%3E");
+  animation: moveRightToLeft 45s linear infinite, rainFall 2s linear infinite;
+}
+
+.App.dark-mode .cloud-layer {
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M210,150 C210,105 180,75 135,75 C105,75 75,90 60,120 C30,120 0,135 0,165 C0,195 30,210 60,210 L210,210 C240,210 270,195 270,165 C270,135 240,120 210,150 Z' fill='%23555' fill-opacity='0.8'/%3E%3Cline x1='60' y1='210' x2='60' y2='250' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='90' y1='210' x2='90' y2='260' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='120' y1='210' x2='120' y2='245' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='150' y1='210' x2='150' y2='255' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='180' y1='210' x2='180' y2='240' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='210' y1='210' x2='210' y2='250' stroke='%2366a6ff' stroke-width='3'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 75s linear infinite, rainFall 1.8s linear infinite;
+}
+
+@keyframes rainFall {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Rain drops effect for dark mode */
+.App.dark-mode {
+  position: relative;
+}
+
+.App.dark-mode::before,
+.App.dark-mode::after,
+.App.dark-mode .cloud-layer {
+  content: '';
+  opacity: 0.3;
+  filter: brightness(0.7);
+}
+
+.App.dark-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M280,200 C280,140 240,100 180,100 C140,100 100,120 80,160 C40,160 0,180 0,220 C0,260 40,280 80,280 L280,280 C320,280 360,260 360,220 C360,180 320,160 280,200 Z' fill='%23333' fill-opacity='0.8'/%3E%3Cline x1='80' y1='280' x2='80' y2='320' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='120' y1='280' x2='120' y2='340' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='160' y1='280' x2='160' y2='330' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='200' y1='280' x2='200' y2='350' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='240' y1='280' x2='240' y2='320' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='280' y1='280' x2='280' y2='340' stroke='%2366a6ff' stroke-width='3'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 60s linear infinite;
+  background-size: 400px 400px;
+  top: 10%;
+}
+
+.App.dark-mode::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M140,100 C140,70 120,50 90,50 C70,50 50,60 40,80 C20,80 0,90 0,110 C0,130 20,140 40,140 L140,140 C160,140 180,130 180,110 C180,90 160,80 140,100 Z' fill='%23444' fill-opacity='0.8'/%3E%3Cline x1='40' y1='140' x2='40' y2='170' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='60' y1='140' x2='60' y2='180' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='80' y1='140' x2='80' y2='165' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='100' y1='140' x2='100' y2='175' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='120' y1='140' x2='120' y2='160' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='140' y1='140' x2='140' y2='170' stroke='%2366a6ff' stroke-width='2'/%3E%3C/svg%3E");
+  animation: moveRightToLeft 45s linear infinite, rainFall 2s linear infinite;
+}
+
+.App.dark-mode .cloud-layer {
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M210,150 C210,105 180,75 135,75 C105,75 75,90 60,120 C30,120 0,135 0,165 C0,195 30,210 60,210 L210,210 C240,210 270,195 270,165 C270,135 240,120 210,150 Z' fill='%23555' fill-opacity='0.8'/%3E%3Cline x1='60' y1='210' x2='60' y2='250' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='90' y1='210' x2='90' y2='260' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='120' y1='210' x2='120' y2='245' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='150' y1='210' x2='150' y2='255' stroke='%2366a6ff' stroke-width='3'/%3E%3Cline x1='180' y1='210' x2='180' y2='240' stroke='%2366a6ff' stroke-width='2'/%3E%3Cline x1='210' y1='210' x2='210' y2='250' stroke='%2366a6ff' stroke-width='3'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 75s linear infinite, rainFall 1.8s linear infinite;
+}
+
+/* Rain drops overlay */
+.App.dark-mode .rain-overlay {
+  content: "";
+  position: fixed;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='30' viewBox='0 0 10 30'%3E%3Cpath d='M5,0 L10,10 L5,30 L0,10 Z' fill='%2366a6ff' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 10px 30px;
+  animation: rain 0.8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+/* Keep only one rain keyframes definition */
+@keyframes rain {
+  0% {
+    background-position: 0px -100px;
+  }
+  100% {
+    background-position: 0px 100vh;
+  }
+}
