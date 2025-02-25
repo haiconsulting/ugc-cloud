@@ -67,15 +67,15 @@ const WelcomePage = () => {
           transition={{ delay: 0.4 }}
         >
           <p>
-            Welcome to the future of user-generated content. UGC Cloud is a thriving community 
-            of creators sharing their exceptional work with the world. Our platform ensures that 
-            creators are fairly compensated while making quality content accessible to all.
+            The future of user-generated content starts here. UGC Cloud is a thriving 
+            community where creators share their exceptional work with the world. Our 
+            platform empowers brands and businesses with high-quality, authentic content 
+            while ensuring creators have the tools and opportunities to succeed.
           </p>
-          
           <p>
-            When you use resources from our platform, 90% of the revenue goes directly to the 
-            creator. The remaining 10% helps us maintain and improve the platform, ensuring a 
-            sustainable ecosystem for everyone.
+            With powerful tools, seamless collaboration, and a dynamic creator network, 
+            UGC Cloud makes it easy to discover, manage, and integrate user-generated 
+            content into your marketing strategy.
           </p>
 
           <div className="features-grid">

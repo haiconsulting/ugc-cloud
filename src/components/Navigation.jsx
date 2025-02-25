@@ -14,7 +14,6 @@ function Navigation({ toggleDarkMode, isDarkMode }) {
         <nav className="nav-container">
             <div className="logo-container">
                 <img src={Logo} alt="UGC Cloud Logo" className="logo" />
-                <span className="logo-text">UGC Cloud</span>
             </div>
             
             <div className="nav-controls">

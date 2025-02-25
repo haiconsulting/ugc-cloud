@@ -82,7 +82,7 @@ const EmailSender = () => {
       <div className="template-section">
         <h3>Email Template</h3>
         <p className="help-text">
-          Use {'{{'}<span>variable_name</span>{'}}'}  to insert variables. Available variables:
+          Use {'{{'}<span>variable_name</span>{'}}'}  to insert variables. Available fields:
           {variables.map(v => ` {{${v}}}`)}
         </p>
         <textarea
@@ -94,13 +94,13 @@ const EmailSender = () => {
       </div>
 
       <div className="variables-section">
-        <h3>Custom Variables</h3>
+        <h3>Dynamic Fields</h3>
         <div className="add-variable-form">
           <input
             type="text"
             value={currentVariable}
             onChange={(e) => setCurrentVariable(e.target.value)}
-            placeholder="Add new variable"
+            placeholder="Add new field"
           />
           <button onClick={addVariable}>Add</button>
         </div>

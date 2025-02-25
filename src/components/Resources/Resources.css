@@ -54,9 +54,17 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .category-btn {
+  min-width: 120px;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -65,16 +73,20 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
+  text-align: center;
+  box-shadow: none;
 }
 
 .category-btn.active {
   background: var(--primary-blue);
   color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .category-btn:hover:not(.active) {
   background: var(--light-blue);
   color: var(--secondary-blue);
+  transform: translateY(-2px);
 }
 
 .resources-grid {
@@ -84,11 +96,20 @@
 }
 
 .resource-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--background-primary);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+}
+
+.light-mode .resource-card {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+}
+
+.light-mode .resource-card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
 }
 
 .resource-thumbnail {

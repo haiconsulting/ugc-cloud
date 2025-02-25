@@ -170,7 +170,7 @@
 
 .suggestion-btn {
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   border: 1px solid var(--primary-blue);
   color: var(--primary-blue);
   border-radius: 8px;
@@ -182,7 +182,8 @@
 }
 
 .suggestion-btn:hover {
-  background: var(--light-blue);
+  background: rgba(227, 242, 253, 0.5);
+  color: var(--secondary-blue);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

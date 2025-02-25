@@ -206,7 +206,7 @@ const InvoiceForm = ({ invoiceData, setInvoiceData }) => {
           <input
             id="invoiceNumber"
             type="text"
-            placeholder={isSOW ? "e.g., SOW-001" : "e.g., INV-001"}
+            placeholder={isSOW ? "SOW-001" : "INV-001"}
             value={invoiceData.invoiceNumber}
             onChange={(e) => setInvoiceData({...invoiceData, invoiceNumber: e.target.value})}
           />
@@ -262,7 +262,7 @@ const InvoiceForm = ({ invoiceData, setInvoiceData }) => {
           <input
             id="clientName"
             type="text"
-            placeholder="e.g., John Doe"
+            placeholder="John Doe"
             value={invoiceData.clientName}
             onChange={(e) => setInvoiceData({...invoiceData, clientName: e.target.value})}
           />
@@ -274,7 +274,7 @@ const InvoiceForm = ({ invoiceData, setInvoiceData }) => {
           <input
             id="clientEmail"
             type="email"
-            placeholder="e.g., client@example.com"
+            placeholder="client@example.com"
             value={invoiceData.clientEmail}
             onChange={(e) => setInvoiceData({...invoiceData, clientEmail: e.target.value})}
           />

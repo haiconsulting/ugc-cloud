@@ -28,8 +28,8 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
       opacity: 1,
       transition: { 
         type: "spring",
-        stiffness: 100,
-        damping: 20
+        stiffness: 80,
+        damping: 15
       }
     }
   };
@@ -37,7 +37,8 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
   const linkVariants = {
     hover: { 
       scale: 1.05,
-      transition: { type: "spring", stiffness: 400, damping: 10 }
+      color: isDarkMode ? "#87CEEB" : "#2196F3",
+      transition: { type: "spring", stiffness: 300, damping: 10 }
     },
     tap: { scale: 0.95 }
   };
@@ -56,9 +57,14 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
       y: 0,
       transition: {
         staggerChildren: 0.07,
-        delayChildren: 0.2
+        delayChildren: 0.1
       }
     }
+  };
+
+  const themeToggleVariants = {
+    light: { rotate: 0, backgroundColor: "rgba(255, 210, 0, 0.2)" },
+    dark: { rotate: 180, backgroundColor: "rgba(100, 100, 255, 0.15)" }
   };
 
   return (
@@ -68,58 +74,81 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
       initial="hidden"
       animate="visible"
     >
-      <motion.div 
-        className="nav-brand"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <Link to="/" className="brand-link">
-          <img 
-            src={`${process.env.PUBLIC_URL}/logo.png`} 
-            alt="UGC Cloud Logo" 
-            className="nav-logo"
-          />
-        </Link>
-      </motion.div>
-
-      <div className="nav-links">
-        {['tools', 'community', 'resources'].map((item) => (
-          <motion.div
-            key={item}
-            variants={linkVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            <Link 
-              to={`/${item}`} 
-              className={`nav-link ${location.pathname === `/${item}` ? 'active' : ''}`}
-            >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
-            </Link>
-          </motion.div>
-        ))}
-      </div>
-      
-      <motion.button 
-        className="theme-toggle"
-        onClick={toggleDarkMode}
-        whileHover={{ scale: 1.1, rotate: 180 }}
-        whileTap={{ scale: 0.9 }}
-        transition={{ duration: 0.2 }}
-      >
-        {isDarkMode ? '🌙' : '☀️'}
-      </motion.button>
-
-      <div className="mobile-menu">
-        <motion.button 
-          className="hamburger-menu"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          whileTap={{ scale: 0.9 }}
+      <div className="nav-container">
+        <motion.div 
+          className="nav-brand"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </motion.button>
+          <Link to="/" className="brand-link">
+            <img 
+              src={`${process.env.PUBLIC_URL}/logo.png`} 
+              alt="UGC Cloud Logo" 
+              className="nav-logo"
+            />
+          </Link>
+        </motion.div>
+
+        <div className="nav-links">
+          {['tools', 'community', 'resources'].map((item) => (
+            <motion.div
+              key={item}
+              variants={linkVariants}
+              whileHover="hover"
+              whileTap="tap"
+              className="nav-link-container"
+            >
+              <Link 
+                to={`/${item}`} 
+                className={`nav-link ${location.pathname === `/${item}` ? 'active' : ''}`}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+                {location.pathname === `/${item}` && (
+                  <motion.div 
+                    className="active-indicator"
+                    layoutId="activeIndicator"
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  />
+                )}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="nav-controls">
+          <motion.button 
+            className="theme-toggle"
+            onClick={toggleDarkMode}
+            variants={themeToggleVariants}
+            animate={isDarkMode ? "dark" : "light"}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <motion.div
+              className="toggle-icon"
+              initial={false}
+              animate={{ rotateZ: isDarkMode ? 90 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isDarkMode ? '🌙' : '☀️'}
+            </motion.div>
+          </motion.button>
+
+          <div className="mobile-menu">
+            <motion.button 
+              className="hamburger-menu"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              <motion.span animate={{ rotate: isMenuOpen ? 45 : 0, y: isMenuOpen ? 8 : 0 }} />
+              <motion.span animate={{ opacity: isMenuOpen ? 0 : 1 }} />
+              <motion.span animate={{ rotate: isMenuOpen ? -45 : 0, y: isMenuOpen ? -8 : 0 }} />
+            </motion.button>
+          </div>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -137,10 +166,12 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
                 variants={linkVariants}
                 whileHover="hover"
                 whileTap="tap"
+                className="mobile-nav-link-container"
               >
                 <Link 
                   to={`/${item}`} 
                   onClick={() => setIsMenuOpen(false)}
+                  className={location.pathname === `/${item}` ? 'active' : ''}
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Link>
