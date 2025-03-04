@@ -82,25 +82,26 @@
 }
 
 .login-btn {
-  padding: 0.75rem 2rem;
-  background: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #4285f4;
   color: white;
   border: none;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem auto;
+  max-width: 240px;
 }
 
 .login-btn:hover {
-  background: var(--secondary-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: #357ae8;
 }
 
 .login-btn:active {
@@ -392,6 +393,12 @@ textarea {
   .recipients-table {
     font-size: 0.9rem;
   }
+
+  .google-signin-container,
+  .signin-spinner,
+  .login-btn {
+    max-width: 100%;
+  }
 }
 
 .csv-sample {
@@ -469,4 +476,27 @@ textarea {
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
   font-family: monospace;
+}
+
+/* Google Sign-in container - updated */
+.google-signin-container {
+  margin: 1.5rem auto;
+  display: flex;
+  justify-content: center;
+  max-width: 240px;
+  height: 40px; /* Set a fixed height */
+}
+
+/* Simple spinner without text */
+.signin-spinner-only {
+  margin: 1.5rem auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-spinner-only .spinner {
+  margin-bottom: 0;
 } 

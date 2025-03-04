@@ -23,17 +23,54 @@ const EmailSender = () => {
   const [sendingProgress, setSendingProgress] = useState(0);
   const [emailSubject, setEmailSubject] = useState('Message from UGC Cloud');
   const [isGapiLoaded, setIsGapiLoaded] = useState(false);
-  const [isGapiInitialized, setIsGapiInitialized] = useState(false);
-  const [isAuthInitialized, setIsAuthInitialized] = useState(false);
+  const [isGsiLoaded, setIsGsiLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
-  // Load the Google API client library
+  // Load the Google Identity Services (GIS) library
   useEffect(() => {
+    const loadGoogleIdentityServices = () => {
+      // Check if the script is already loaded
+      if (window.google && window.google.accounts) {
+        setIsGsiLoaded(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Check if Client ID is available
+      if (!GOOGLE_CLIENT_ID) {
+        console.error("Google Client ID is not configured");
+        setError(process.env.NODE_ENV === 'development' 
+          ? 'Google Client ID is missing. Please configure your .env file with REACT_APP_GOOGLE_CLIENT_ID.'
+          : 'Authentication configuration error. Please contact support.');
+        setIsLoading(false);
+        return;
+      }
+
+      // Create and load the GSI script
+      console.log("Loading Google Identity Services script...");
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        console.log("Google Identity Services script loaded successfully");
+        setIsGsiLoaded(true);
+        setIsLoading(false);
+      };
+      script.onerror = () => {
+        console.error("Error loading Google Identity Services script");
+        setError('Failed to load Google authentication. Please check your internet connection and try again.');
+        setIsLoading(false);
+      };
+      document.body.appendChild(script);
+    };
+
+    // Load the Google API client library (still needed for Gmail API)
     const loadGoogleApi = () => {
       // Check if the script is already loaded
       if (window.gapi) {
         setIsGapiLoaded(true);
-        initGoogleClient();
         return;
       }
 
@@ -46,7 +83,20 @@ const EmailSender = () => {
       script.onload = () => {
         console.log("Google API script loaded successfully");
         setIsGapiLoaded(true);
-        initGoogleClient();
+        
+        // Initialize GAPI client (only for API access, not for auth)
+        window.gapi.load('client', async () => {
+          try {
+            console.log("Initializing GAPI client...");
+            await window.gapi.client.init({
+              apiKey: process.env.REACT_APP_GOOGLE_API_KEY || null,
+              discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest']
+            });
+            console.log("GAPI client initialized successfully");
+          } catch (error) {
+            console.error("Error initializing GAPI client:", error);
+          }
+        });
       };
       script.onerror = () => {
         console.error("Error loading Google API script");
@@ -56,199 +106,127 @@ const EmailSender = () => {
       document.body.appendChild(script);
     };
 
-    const initGoogleClient = () => {
-      if (!window.gapi) {
-        console.error("Google API not available");
-        setError('Google API failed to load. Please refresh the page and try again.');
-        setIsLoading(false);
-        return;
-      }
-
-      console.log("Loading GAPI client...");
-      try {
-        window.gapi.load('client', async () => {
-          try {
-            console.log("Initializing GAPI client...");
-            
-            // Check if client ID is available
-            if (!GOOGLE_CLIENT_ID) {
-              console.error("Google Client ID is not configured");
-              setError(process.env.NODE_ENV === 'development' 
-                ? 'Google Client ID is missing. Please configure your .env file with REACT_APP_GOOGLE_CLIENT_ID.'
-                : 'Authentication configuration error. Please contact support.');
-              setIsLoading(false);
-              return;
-            }
-            
-            // Get the redirect URI based on current environment
-            const redirectUri = getRedirectUri();
-            console.log("Using redirect URI:", redirectUri);
-            
-            // Initialize the client with appropriate params
-            await window.gapi.client.init({
-              clientId: GOOGLE_CLIENT_ID,
-              scope: GMAIL_SCOPES.join(' '),
-              redirect_uri: redirectUri
-            });
-            
-            console.log("GAPI client initialized successfully");
-            setIsGapiInitialized(true);
-            
-            // Load auth2 library
-            window.gapi.load('auth2', async () => {
-              try {
-                console.log("Initializing auth2...");
-                
-                // Check if auth2 is already initialized
-                if (window.gapi.auth2.getAuthInstance()) {
-                  console.log("Auth2 already initialized");
-                  setIsAuthInitialized(true);
-                  
-                  // Check if user is already signed in
-                  if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                    console.log("User is already signed in");
-                    handleAuthSuccess(window.gapi.auth2.getAuthInstance().currentUser.get());
-                  }
-                  
-                  setIsLoading(false);
-                  return;
-                }
-                
-                const auth2 = await window.gapi.auth2.init({
-                  client_id: GOOGLE_CLIENT_ID,
-                  scope: GMAIL_SCOPES.join(' '),
-                  redirect_uri: redirectUri
-                });
-                
-                console.log("Auth2 initialized successfully");
-                setIsAuthInitialized(true);
-                
-                // Check if user is already signed in
-                if (auth2.isSignedIn.get()) {
-                  console.log("User is already signed in");
-                  handleAuthSuccess(auth2.currentUser.get());
-                }
-                
-                setIsLoading(false);
-              } catch (error) {
-                console.error("Error initializing auth2:", error);
-                const errorMessage = process.env.NODE_ENV === 'development'
-                  ? `Failed to initialize Google authentication: ${error.message}`
-                  : 'Authentication service initialization failed. Please try again later.';
-                setError(errorMessage);
-                setIsLoading(false);
-              }
-            });
-          } catch (error) {
-            console.error("Error initializing GAPI client:", error);
-            const errorMessage = process.env.NODE_ENV === 'development'
-              ? `Failed to initialize Google API client: ${error.message}`
-              : 'Authentication service initialization failed. Please try again later.';
-            setError(errorMessage);
-            setIsLoading(false);
-          }
-        });
-      } catch (error) {
-        console.error("Exception during gapi.load:", error);
-        const errorMessage = process.env.NODE_ENV === 'development'
-          ? `Failed to load Google API client: ${error.message}`
-          : 'Authentication service initialization failed. Please try again later.';
-        setError(errorMessage);
-        setIsLoading(false);
-      }
-    };
-
+    loadGoogleIdentityServices();
     loadGoogleApi();
   }, []);
 
-  const handleAuthSuccess = (googleUser) => {
-    const profile = googleUser.getBasicProfile();
-    const token = googleUser.getAuthResponse().access_token;
+  const handleCredentialResponse = (response) => {
+    console.log("Google Identity Services authentication successful");
+    
+    // The response contains a credential with a JWT token
+    const token = response.credential;
+    
+    // Decode the JWT to get user information
+    const decodedToken = parseJwt(token);
     
     setUser({
-      name: profile.getName(),
-      email: profile.getEmail(),
-      imageUrl: profile.getImageUrl()
+      name: decodedToken.name,
+      email: decodedToken.email,
+      imageUrl: decodedToken.picture
     });
-    setAccessToken(token);
-    setIsAuthenticated(true);
+    
+    // Get access token for Gmail API
+    if (window.google && window.google.accounts && window.google.accounts.oauth2) {
+      window.google.accounts.oauth2.initTokenClient({
+        client_id: GOOGLE_CLIENT_ID,
+        scope: GMAIL_SCOPES.join(' '),
+        callback: (tokenResponse) => {
+          if (tokenResponse.error) {
+            console.error("Error getting access token:", tokenResponse.error);
+            setError('Failed to get access to your Gmail account. Please try again.');
+            setIsSigningIn(false);
+            return;
+          }
+          
+          setAccessToken(tokenResponse.access_token);
+          setIsAuthenticated(true);
+          setIsLoading(false);
+          setIsSigningIn(false);
+        }
+      }).requestAccessToken();
+    } else {
+      console.error("Google oauth2 client not available");
+      setError('Google authentication service not available. Please refresh the page and try again.');
+      setIsSigningIn(false);
+    }
+  };
+  
+  // Helper function to parse JWT token
+  const parseJwt = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      console.error("Error parsing JWT token:", e);
+      return {};
+    }
   };
 
   const signIn = () => {
-    setIsLoading(true);
+    setIsSigningIn(true);
     
-    if (!isAuthInitialized) {
-      console.error("Auth2 is not initialized yet");
+    if (!isGsiLoaded) {
+      console.error("Google Identity Services not loaded yet");
       setError('Google authentication is not initialized yet. Please wait or refresh the page.');
-      setIsLoading(false);
+      setIsSigningIn(false);
       return;
     }
     
     try {
-      console.log("Attempting to sign in...");
-      const auth2 = window.gapi.auth2.getAuthInstance();
-      
-      if (!auth2) {
-        console.error("Auth2 instance is null");
-        setError('Failed to initialize Google authentication. Please refresh the page and try again.');
-        setIsLoading(false);
-        return;
-      }
-      
-      auth2.signIn()
-        .then(user => {
-          console.log("Sign-in successful");
-          handleAuthSuccess(user);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error("Error signing in with Google:", error);
-          setError('Failed to sign in with Google. Please try again.');
-          setIsLoading(false);
+      // Create the Google Sign-In button directly and make it visible
+      const googleButtonContainer = document.getElementById('google-signin-button');
+      if (googleButtonContainer) {
+        // Clear any previous content
+        googleButtonContainer.innerHTML = '';
+        
+        // Make the container visible
+        googleButtonContainer.style.display = 'flex';
+        googleButtonContainer.style.visibility = 'visible';
+        
+        // Initialize Google Identity Services
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleCredentialResponse,
+          auto_select: false,
+          cancel_on_tap_outside: true
         });
+        
+        // Render the Google Sign-In button (and make it actually visible this time)
+        window.google.accounts.id.renderButton(
+          googleButtonContainer, 
+          { 
+            type: 'standard',
+            theme: 'filled_blue', 
+            size: 'large',
+            text: 'signin_with',
+            shape: 'rectangular',
+            logo_alignment: 'left',
+            width: 240
+          }
+        );
+        
+        // Don't use the prompt for now as it's causing issues
+        // window.google.accounts.id.prompt();
+      } else {
+        console.error("Google sign-in button container not found");
+        setError('Unable to render sign-in button. Please refresh the page.');
+        setIsSigningIn(false);
+      }
     } catch (error) {
-      console.error("Exception during sign in:", error);
-      setError('An error occurred during Google sign-in. Please refresh the page and try again.');
-      setIsLoading(false);
+      console.error("Error during sign-in initialization:", error);
+      setError(`Failed to initialize sign-in. Error: ${error.message}`);
+      setIsSigningIn(false);
     }
   };
 
   const signOut = () => {
-    setIsLoading(true);
-    
-    if (!isAuthInitialized) {
-      console.error("Auth2 is not initialized yet");
-      setError('Google authentication is not initialized yet. Please wait or refresh the page.');
-      setIsLoading(false);
-      return;
-    }
-    
-    try {
-      console.log("Attempting to sign out...");
-      const auth2 = window.gapi.auth2.getAuthInstance();
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.disableAutoSelect();
       
-      if (!auth2) {
-        console.error("Auth2 instance is null");
-        setError('Failed to initialize Google authentication. Please refresh the page and try again.');
-        setIsLoading(false);
-        return;
-      }
+      setUser(null);
+      setAccessToken(null);
+      setIsAuthenticated(false);
       
-      auth2.signOut()
-        .then(() => {
-          console.log("Sign-out successful");
-          setUser(null);
-          setAccessToken(null);
-          setIsAuthenticated(false);
-          setIsLoading(false);
-        })
-        .catch(error => {
-          console.error("Error signing out:", error);
-          setIsLoading(false);
-        });
-    } catch (error) {
-      console.error("Exception during sign out:", error);
-      setIsLoading(false);
+      console.log("User signed out");
     }
   };
 
@@ -347,6 +325,7 @@ const EmailSender = () => {
               UGC Cloud needs access to your Gmail account to send emails on your behalf.
               Your credentials are secure and we don't store your password.
             </p>
+            
             {isLoading ? (
               <div className="loading-spinner">
                 <div className="spinner"></div>
@@ -354,18 +333,27 @@ const EmailSender = () => {
               </div>
             ) : (
               <>
-                <button 
-                  onClick={signIn} 
-                  className="login-btn"
-                  disabled={!isAuthInitialized || isLoading}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21.8055 10.0415H21V10H12V14H17.6515C16.827 16.3285 14.6115 18 12 18C8.6865 18 6 15.3135 6 12C6 8.6865 8.6865 6 12 6C13.5295 6 14.921 6.577 15.9805 7.5195L18.809 4.691C17.023 3.0265 14.634 2 12 2C6.4775 2 2 6.4775 2 12C2 17.5225 6.4775 22 12 22C17.5225 22 22 17.5225 22 12C22 11.3295 21.931 10.675 21.8055 10.0415Z" fill="white"/>
-                  </svg>
-                  Sign in with Google
-                </button>
+                {!isSigningIn ? (
+                  <button 
+                    onClick={signIn} 
+                    className="login-btn"
+                    disabled={!isGsiLoaded || isLoading}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M21.8055 10.0415H21V10H12V14H17.6515C16.827 16.3285 14.6115 18 12 18C8.6865 18 6 15.3135 6 12C6 8.6865 8.6865 6 12 6C13.5295 6 14.921 6.577 15.9805 7.5195L18.809 4.691C17.023 3.0265 14.634 2 12 2C6.4775 2 2 6.4775 2 12C2 17.5225 6.4775 22 12 22C17.5225 22 22 17.5225 22 12C22 11.3295 21.931 10.675 21.8055 10.0415Z" fill="white"/>
+                    </svg>
+                    Sign in with Google
+                  </button>
+                ) : (
+                  <div className="signin-spinner-only">
+                    <div className="spinner"></div>
+                  </div>
+                )}
                 
-                {process.env.NODE_ENV === 'development' && !isAuthInitialized && !error && (
+                {/* Container for the Google Sign-in button - will be populated by the Google API */}
+                <div id="google-signin-button" className="google-signin-container" style={{display: 'none'}}></div>
+                
+                {process.env.NODE_ENV === 'development' && !isGsiLoaded && !error && (
                   <div className="dev-notice">
                     <h4>Developer Information</h4>
                     <p>To complete Gmail integration, follow these steps:</p>
@@ -381,6 +369,7 @@ const EmailSender = () => {
                 )}
               </>
             )}
+            
             {error && <div className="error-message">{error}</div>}
           </div>
         ) : (
