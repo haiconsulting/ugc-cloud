@@ -1,161 +1,120 @@
-# GenVoice - AI-Powered Document Generator
+# UGC Cloud Email Sender
 
-GenVoice is a modern web application that helps users create professional invoices and statements of work (SOW) using AI-powered template generation and customization.
+A React component for sending personalized emails to multiple recipients using the Gmail API.
 
 ## Features
 
-- 📄 Create and customize invoices and SOW documents
-- 🤖 AI-powered template generation
-- 🎨 Dark/Light mode support
-- 🖼️ Logo and signature upload capabilities
-- 📝 Rich text editing with TinyMCE
-- 💾 Custom template saving and management
-- 📱 Responsive design for all devices
+- 🔐 Google OAuth Authentication
+- 📧 Send emails to multiple recipients
+- 🔄 Personalization using template variables
+- 📝 Rich text editor for email composition
+- 📎 File attachment support (coming soon)
+- 📊 Email sending statistics
 
-## Prerequisites
+## Getting Started
 
-Before you begin, ensure you have installed:
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+### Prerequisites
 
-## Environment Variables
+- Node.js (v14 or newer)
+- npm or yarn
+- A Google Cloud project with the Gmail API enabled
 
-Create a `.env` file in the root directory with the following variables:
+### Installation
 
-## Installation
-
-1. **Clone the repository:**
-    ```bash
-    git clone https://github.com/ianmkinney/genvoice-live.git
-    cd genvoice-live
-    ```
-
-2. **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3. **Set up environment variables:**
-    Create a `.env` file in the root directory with the following variables:
-    ```env
-    REACT_APP_OPENAI_API_KEY=your_openai_api_key
-    REACT_APP_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
-    REACT_APP_TINYMCE_API_KEY=your_tinymce_api_key
-    ```
-
-4. **Start the development server:**
-    ```bash
-    npm start
-    ```
-    The application will be available at `http://localhost:3000/genvoice-live`
-
-## Building and Deployment
-
-- **Create a production build:**
-    ```bash
-    npm run build
-    ```
-
-- **Deploy to GitHub Pages:**
-    ```bash
-    npm run deploy
-    ```
-    Ensure that the `homepage` field in your `package.json` is set correctly to enable GitHub Pages deployment.
-
-## Project Structure
-
+1. Clone the repository:
 ```bash
-genvoice-live/
-├── public/
-│   ├── index.html
-│   ├── manifest.json
-│   ├── favicon.ico
-│   ├── logo192.png
-│   └── logo512.png
-├── src/
-│   ├── components/
-│   │   ├── BrandingManager/
-│   │   ├── DocumentCreator/
-│   │   ├── InvoiceForm/
-│   │   ├── InvoicePreview/
-│   │   ├── Navigation/
-│   │   ├── TemplateGenerator/
-│   │   ├── LoadingIndicator/
-│   │   └── CostDisplay/
-│   ├── services/
-│   │   └── openaiService.js
-│   ├── templates/
-│   │   ├── defaultTemplate.js
-│   │   ├── sowTemplate.js
-│   │   └── templateManager.js
-│   ├── App.js
-│   ├── App.css
-│   └── index.js
-├── .env
-├── package.json
-└── README.md
+git clone https://github.com/yourusername/ugc-cloud.git
+cd ugc-cloud
 ```
 
-## Key Features
+2. Install dependencies:
+```bash
+npm install
+```
 
-### Document Creator
-- **Create Professional Invoices and SOWs:** Easily generate and customize invoices and Statements of Work.
-- **Real-Time Preview:** Instant preview of documents with the TinyMCE rich text editor.
-- **Custom Branding:** Upload and manage logos and signatures to personalize your documents.
-- **Dark/Light Mode:** Toggle between dark and light themes for a better user experience.
+3. Create a `.env.local` file in the project root with your Google OAuth Client ID:
+```
+REACT_APP_DEV_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+```
 
-### Template Generator
-- **AI-Powered Customization:** Utilize OpenAI to generate and customize document templates based on your prompts.
-- **Multiple Base Templates:** Choose between default invoice templates and Statement of Work templates.
-- **Custom Field Support:** Add and manage custom fields to suit your specific needs.
-- **Cost Tracking:** Monitor the cost associated with AI-generated templates.
+### Google API Setup (Development)
 
-### Responsive Design
-- **Multi-Device Support:** Fully responsive design ensures usability across desktop, tablet, and mobile devices.
-- **Smooth Animations:** Enhanced user experience with Framer Motion animations.
-- **Accessible Interface:** Designed with accessibility in mind to accommodate all users.
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable the Gmail API for your project
+4. Create OAuth 2.0 credentials:
+   - Application type: Web application
+   - Authorized JavaScript origins: `http://localhost:3000`
+   - Authorized redirect URIs: `http://localhost:3000/oauth2callback`
+5. Copy the Client ID to your `.env.local` file
 
-## Technologies Used
+### Running the Development Server
 
-- **React 18:** Front-end library for building user interfaces.
-- **Framer Motion:** Library for smooth animations and transitions.
-- **TinyMCE:** Rich text editor for document previews and editing.
-- **OpenAI API:** AI capabilities for template generation and customization.
-- **html2pdf.js:** Library for converting HTML content to PDF format.
-- **React Router DOM:** Handling routing within the application.
-- **GitHub Pages:** Hosting the live application.
+```bash
+npm start
+```
 
-## Contributing
+The application will be available at `http://localhost:3000`.
 
-We welcome contributions! Please follow these steps:
+## Usage
 
-1. **Fork the repository**
-2. **Create your feature branch:**
-    ```bash
-    git checkout -b feature/AmazingFeature
-    ```
-3. **Commit your changes:**
-    ```bash
-    git commit -m 'Add some AmazingFeature'
-    ```
-4. **Push to the branch:**
-    ```bash
-    git push origin feature/AmazingFeature
-    ```
-5. **Open a Pull Request**
+### Signing In
 
-Please ensure your code follows the existing style and includes relevant tests.
+1. Navigate to the Email Sender page
+2. Click "Sign in with Google"
+3. Follow the prompts to authorize the application to access your Gmail account
+
+### Sending Emails
+
+1. Upload a CSV file containing recipient data with headers
+2. Compose your email using the rich text editor
+3. Add personalization using template variables (e.g., `{{firstName}}`, `{{company}}`)
+4. Review your email and send!
+
+### CSV Format
+
+Your CSV file should include the following headers:
+- `email` (required): The recipient's email address
+- Any other fields you want to use for personalization
+
+Example:
+```
+email,firstName,lastName,company
+john.doe@example.com,John,Doe,ACME Inc.
+jane.smith@example.com,Jane,Smith,XYZ Corp.
+```
+
+## Production Deployment
+
+For instructions on deploying this application to production, please see the [Deployment Guide](DEPLOYMENT.md).
+
+## Development
+
+### Project Structure
+
+```
+src/
+├── components/
+│   ├── EmailSender/         # Main email sender component
+│   │   ├── EmailSender.js
+│   │   └── EmailSender.css
+│   └── Auth/                # Authentication components
+│       ├── OAuth2Callback.js
+│       └── OAuth2Callback.css
+├── services/
+│   ├── gmailService.js      # Gmail API interactions
+│   └── emailService.js      # Email processing logic
+├── config/
+│   └── google.js            # Google API configuration
+└── App.js                   # Main application component
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## Acknowledgements
 
-- **OpenAI:** For providing the powerful AI capabilities.
-- **TinyMCE:** For the rich text editor integration.
-- **Unsplash:** For image integration and stock photos.
-- **The React Community:** For excellent tools and libraries that make development easier.
-- **Framer Motion:** For smooth and intuitive animations.
-
-Thanks for reading!
+- [Google Gmail API](https://developers.google.com/gmail/api)
+- [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)

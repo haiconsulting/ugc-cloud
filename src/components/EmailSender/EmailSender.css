@@ -5,6 +5,62 @@
   padding: 2rem;
 }
 
+.user-info {
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sign-out-btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.sign-out-btn:hover {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+.sending-progress {
+  margin: 1.5rem 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--primary-blue);
+  transition: width 0.3s ease;
+}
+
 .auth-section {
   text-align: center;
   padding: 3rem;
@@ -50,6 +106,14 @@
 .login-btn:active {
   transform: translateY(0);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: var(--primary-blue);
+  transform: none;
+  box-shadow: none;
 }
 
 .template-section,
@@ -234,6 +298,88 @@ textarea {
   cursor: not-allowed;
 }
 
+.subject-input {
+  margin-bottom: 1.5rem;
+}
+
+.subject-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.subject-input input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.template-selection {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.template-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.template-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-blue);
+}
+
+.template-card h4 {
+  margin: 0 0 0.5rem;
+  color: var(--primary-blue);
+  font-size: 1.1rem;
+}
+
+.template-card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.use-template-btn {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.use-template-btn:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
 @media (max-width: 768px) {
   .email-sender {
     padding: 1rem;
@@ -246,4 +392,81 @@ textarea {
   .recipients-table {
     font-size: 0.9rem;
   }
+}
+
+.csv-sample {
+  margin-bottom: 1rem;
+}
+
+.download-sample {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-blue);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.download-sample:before {
+  content: "↓";
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.download-sample:hover {
+  color: var(--secondary-blue);
+  text-decoration: underline;
+}
+
+/* Add loading spinner styles */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(33, 150, 243, 0.2);
+  border-top: 4px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.dev-notice {
+  margin-top: 2rem;
+  background-color: #f5f5f5;
+  border-left: 4px solid #2196F3;
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.dev-notice h4 {
+  margin-top: 0;
+  color: #2196F3;
+}
+
+.dev-notice ol {
+  padding-left: 1.5rem;
+}
+
+.dev-notice li {
+  margin-bottom: 0.5rem;
+}
+
+.dev-notice code {
+  background-color: #e0e0e0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
 } 
