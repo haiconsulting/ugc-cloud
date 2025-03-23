@@ -1082,3 +1082,55 @@ label {
   box-shadow: var(--card-hover-shadow);
 }
 
+/* Section container styles */
+.section-container {
+  width: 100%;
+  padding: var(--space-xl) 0;
+}
+
+.section-container.primary {
+  background: var(--background-primary);
+}
+
+.section-container.secondary {
+  background: var(--background-secondary);
+}
+
+.section-container.accent {
+  background: var(--secondary-gradient);
+}
+
+/* Light mode section variations */
+.light-mode .section-container.primary {
+  background: var(--light-bg-primary);
+}
+
+.light-mode .section-container.secondary {
+  background: var(--light-bg-secondary);
+}
+
+.light-mode .section-container.accent {
+  background: var(--gradient-light);
+}
+
+/* Dark mode section variations */
+.dark-mode .section-container.primary {
+  background: var(--dark-bg-primary);
+}
+
+.dark-mode .section-container.secondary {
+  background: var(--dark-bg-secondary);
+}
+
+.dark-mode .section-container.accent {
+  background: var(--gradient-dark);
+}
+
+/* Content container */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  width: 100%;
+}
+

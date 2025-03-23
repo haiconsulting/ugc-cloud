@@ -8,7 +8,7 @@ body {
   color: var(--text-primary);
   transition: all 0.3s ease;
   line-height: var(--line-height-normal);
-  font-size: 16px;
+  font-size: var(--text-base);
 }
 
 body.dark-mode {
@@ -32,17 +32,63 @@ code {
 }
 
 :root {
-  /* Modern Typography */
+  /* Modern Typography System */
+  /* Font Families */
   --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'Inter', system-ui, sans-serif;
+  --font-alt-1: 'Ubuntu', system-ui, sans-serif; 
+  --font-alt-2: 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', monospace;
+  
+  /* Font Sizes - Using a modular scale for better rhythm */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  
+  /* Enhanced Spacing System - more generous than current */
+  --space-3xs: 0.375rem;   /* 6px */
+  --space-2xs: 0.75rem;    /* 12px */
+  --space-xs: 1.25rem;     /* 20px */
+  --space-sm: 1.75rem;     /* 28px */
+  --space-md: 2.5rem;      /* 40px */
+  --space-lg: 3.5rem;      /* 56px */
+  --space-xl: 5rem;        /* 80px */
+  --space-2xl: 7rem;       /* 112px */
+  
+  /* Font Weights */
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
   --line-height-normal: 1.5;
-  --line-height-heading: 1.2;
-  --letter-spacing-tight: -0.01em;
-  --letter-spacing-wide: 0.02em;
+  --line-height-relaxed: 1.75;
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.015em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Light Mode Text Colors */
+  --light-text-primary: #1A202C;    /* Dark charcoal for maximum readability */
+  --light-text-secondary: #4A5568;  /* Dark gray for secondary content */
+  --light-text-tertiary: #718096;   /* Medium gray for less important text */
+  --light-text-muted: #A0AEC0;      /* Light gray for disabled/muted text */
+  
+  /* Dark Mode Text Colors */
+  --dark-text-primary: #F7FAFC;     /* Off-white for maximum readability */
+  --dark-text-secondary: #E2E8F0;   /* Light gray for secondary content */
+  --dark-text-tertiary: #A0AEC0;    /* Medium gray for less important text */
+  --dark-text-muted: #718096;       /* Darker gray for disabled/muted text */
   
   /* Updated Color System */
   --primary-blue: #4361ee;
@@ -327,4 +373,135 @@ a:hover {
 .light-mode .action-button:hover,
 .light-mode .select-plan-button:hover {
   background: var(--light-cta);
+}
+
+/* Apply text colors to light/dark mode */
+body.light-mode {
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --text-tertiary: var(--light-text-tertiary);
+  --text-muted: var(--light-text-muted);
+}
+
+body.dark-mode {
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --text-tertiary: var(--dark-text-tertiary);
+  --text-muted: var(--dark-text-muted);
+}
+
+/* Global Typography Styles */
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background-primary);
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  line-height: var(--line-height-normal);
+  font-size: var(--text-base);
+}
+
+/* Heading Styles */
+h1, .h1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+h2, .h2 {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+h3, .h3 {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h4, .h4 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+h5, .h5 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+h6, .h6 {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Body Text */
+p, .body-text {
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.body-large {
+  font-size: var(--text-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.body-small {
+  font-size: var(--text-sm);
+  line-height: var(--line-height-normal);
+  color: var(--text-tertiary);
+}
+
+.caption {
+  font-size: var(--text-xs);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--text-tertiary);
+}
+
+/* Control text line length for improved readability */
+.content-container p,
+.welcome-description p,
+.article-content p,
+.preview-content p {
+  max-width: 72ch; /* Approximately 72 characters per line */
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --text-5xl: 2.25rem;    /* Smaller h1 on mobile */
+    --text-4xl: 1.875rem;   /* Smaller h2 on mobile */
+    --text-3xl: 1.5rem;     /* Smaller h3 on mobile */
+    --text-2xl: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 1.0625rem;  /* 17px base on desktop for better readability */
+  }
 }
