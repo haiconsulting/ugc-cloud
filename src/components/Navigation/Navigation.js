@@ -21,6 +21,12 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos, isMenuOpen]);
 
+  useEffect(() => {
+    console.log("Dark mode logo path:", `${process.env.PUBLIC_URL}/logo-dark.png`);
+    console.log("Light mode logo path:", `${process.env.PUBLIC_URL}/logo.png`);
+    console.log("Current mode:", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
   const navVariants = {
     hidden: { y: -100, opacity: 0 },
     visible: { 
@@ -75,19 +81,17 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
       animate="visible"
     >
       <div className="nav-container">
-        <motion.div 
-          className="nav-brand"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
+        <div className="nav-brand">
           <Link to="/" className="brand-link">
             <img 
-              src={`${process.env.PUBLIC_URL}/logo.png`} 
-              alt="UGC Cloud Logo" 
+              src={isDarkMode 
+                ? `${process.env.PUBLIC_URL}/DarkModeLogo.png` 
+                : `${process.env.PUBLIC_URL}/logo.png`} 
+              alt="Logo"
               className="nav-logo"
             />
           </Link>
-        </motion.div>
+        </div>
 
         <div className="nav-links">
           {['tools', 'community', 'resources'].map((item) => (
@@ -128,10 +132,10 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
             <motion.div
               className="toggle-icon"
               initial={false}
-              animate={{ rotateZ: isDarkMode ? 90 : 0 }}
+              animate={{ rotateZ: isDarkMode ? 180 : 0 }}
               transition={{ duration: 0.3 }}
             >
-              {isDarkMode ? '🌙' : '☀️'}
+              {isDarkMode ? '🌧️' : '☀️'}
             </motion.div>
           </motion.button>
 

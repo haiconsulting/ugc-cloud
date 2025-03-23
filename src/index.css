@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--background-primary);
   min-height: 100vh;
   color: var(--text-primary);
   transition: all 0.3s ease;
+  line-height: var(--line-height-normal);
+  font-size: 16px;
 }
 
 body.dark-mode {
@@ -28,4 +28,303 @@ code {
 
 * {
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:root {
+  /* Modern Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-normal: 1.5;
+  --line-height-heading: 1.2;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-wide: 0.02em;
+  
+  /* Updated Color System */
+  --primary-blue: #4361ee;
+  --secondary-blue: #3f37c9;
+  --sky-blue: #4cc9f0;
+  --navy-blue: #3a0ca3;
+  --accent-color: #4cc9f0;
+  --success-color: #4ade80;
+  --warning-color: #fbbf24;
+  --error-color: #f87171;
+  
+  /* Light Mode */
+  --light-bg-primary: #E6F7FF;
+  --light-bg-secondary: #ffffff;
+  --light-text-primary: #333C59;
+  --light-text-secondary: #4A5272;
+  
+  /* Modify light mode specific colors */
+  --light-accent: #FFD6E8;
+  --light-accent-secondary: #E8E6FF;
+  --light-cta: #FFEE99;
+  
+  /* Dark Mode */
+  --dark-bg-primary: #0D1B2A;
+  --dark-bg-secondary: #312244;
+  --dark-text-primary: #f8f9fa;
+  --dark-text-secondary: #ced4da;
+  --dark-accent: #00FFF5;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #4361ee, #4cc9f0);
+  --gradient-dark: linear-gradient(135deg, #0D1B2A, #312244);
+  --gradient-warm: linear-gradient(135deg, #7F3FD8, #00FFF5);
+  --gradient-light: linear-gradient(135deg, #FFD6E8, #E8E6FF);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 15px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08), 0 15px 35px rgba(0, 0, 0, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(67, 97, 238, 0.3);
+  
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Spacing System */
+  --space-3xs: 0.25rem;   /* 4px */
+  --space-2xs: 0.5rem;    /* 8px */
+  --space-xs: 0.75rem;    /* 12px */
+  --space-sm: 1rem;       /* 16px */
+  --space-md: 1.5rem;     /* 24px */
+  --space-lg: 2rem;       /* 32px */
+  --space-xl: 3rem;       /* 48px */
+  --space-2xl: 4rem;      /* 64px */
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Enhanced Color System */
+  --vibrant-pink: #f72585;
+  --vibrant-purple: #7209b7;
+}
+
+/* Smooth dark/light mode transitions */
+body.color-mode-transition * {
+  transition: background-color 0.5s ease, 
+              color 0.5s ease, 
+              border-color 0.5s ease, 
+              box-shadow 0.5s ease !important;
+}
+
+/* Base typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  margin-top: 0;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+}
+
+/* Accessibility improvements */
+*:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-blue);
+  color: white;
+  padding: 8px;
+  z-index: 1001;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Updated scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive container */
+.container {
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-md) 0;
+}
+
+/* Improve form elements */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.light-mode input, 
+.light-mode textarea, 
+.light-mode select {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Add button styles globally */
+button {
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+  transition: all 0.3s ease;
+}
+
+/* Make links more consistent */
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+.dark-mode a {
+  color: var(--dark-accent);
+}
+
+.dark-mode *:focus-visible {
+  outline: 2px solid var(--dark-accent);
+}
+
+.dark-mode input:focus, 
+.dark-mode textarea:focus, 
+.dark-mode select:focus {
+  border-color: var(--dark-accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 245, 0.3);
+}
+
+/* Subtle outline using Cloud Gray */
+.dark-mode .container,
+.dark-mode .card {
+  border-color: rgba(68, 85, 102, 0.3);
+}
+
+/* Electric Purple accent for important elements */
+.dark-mode .highlight,
+.dark-mode .feature-item:hover {
+  background: rgba(127, 63, 216, 0.15);
+  border-color: rgba(127, 63, 216, 0.3);
+}
+
+.light-mode a {
+  color: #6b639d;
+}
+
+.light-mode a:hover {
+  color: #504a80;
+}
+
+.light-mode *:focus-visible {
+  outline: 2px solid var(--light-accent);
+}
+
+.light-mode input:focus, 
+.light-mode textarea:focus, 
+.light-mode select:focus {
+  border-color: var(--light-accent);
+  box-shadow: 0 0 0 3px rgba(255, 214, 232, 0.3);
+}
+
+/* Button styling for light mode */
+.light-mode .get-started-btn,
+.light-mode .backup-btn,
+.light-mode .import-btn,
+.light-mode .create-post-btn,
+.light-mode .category-btn,
+.light-mode .tab-button,
+.light-mode .submit-button,
+.light-mode .purchase-button,
+.light-mode .login-btn,
+.light-mode .action-button,
+.light-mode .select-plan-button {
+  background: var(--gradient-light);
+  color: var(--light-text-primary);
+}
+
+.light-mode .get-started-btn:hover,
+.light-mode .backup-btn:hover,
+.light-mode .import-btn:hover,
+.light-mode .create-post-btn:hover,
+.light-mode .category-btn:hover,
+.light-mode .tab-button:hover,
+.light-mode .submit-button:hover,
+.light-mode .purchase-button:hover,
+.light-mode .login-btn:hover,
+.light-mode .action-button:hover,
+.light-mode .select-plan-button:hover {
+  background: var(--light-cta);
 }

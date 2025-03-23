@@ -16,24 +16,40 @@
 .reviews-section {
   max-width: 1200px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg);
   padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
   text-align: center;
+  backdrop-filter: blur(10px);
+  border: var(--card-border);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.welcome-content:hover,
+.samples-section:hover,
+.reviews-section:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 .welcome-content h1 {
-  color: #333;
-  font-size: 2.5rem;
+  color: var(--text-primary);
+  font-size: 2.8rem;
   margin-bottom: 2rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.2;
 }
 
 .welcome-description {
-  color: #666;
-  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .welcome-description p {
@@ -42,53 +58,69 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin: 3rem 0;
 }
 
 .feature-card {
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.8);
+  padding: 2.5rem;
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+  border: var(--card-border);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
 }
 
 .feature-card i {
   font-size: 2rem;
-  color: var(--primary-blue);
-  margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-  color: #333;
+  color: var(--accent-color);
   margin-bottom: 1rem;
 }
 
 .feature-card p {
-  color: #666;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex-grow: 1;
 }
 
-.get-started-btn {
-  padding: 1rem 3rem;
-  font-size: 1.2rem;
-  background: var(--primary-blue);
+/* Add CTA button styling */
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  background: var(--button-gradient);
   color: white;
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
   font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.get-started-btn:hover {
-  background: var(--secondary-blue);
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  background: var(--hover-gradient);
 }
 
 .samples-section h2,

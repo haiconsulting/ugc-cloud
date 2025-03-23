@@ -6,6 +6,8 @@ import WelcomePage from './components/WelcomePage/WelcomePage';
 import Tools from './components/Tools/Tools';
 import Community from './components/Community/Community';
 import Resources from './components/Resources/Resources';
+import RainCloudBackground from './components/RainCloudBackground';
+import SunnyCloudBackground from './components/SunnyCloudBackground';
 import './App.css';
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="cloud-layer" />
+        {isDarkMode ? <RainCloudBackground /> : <SunnyCloudBackground />}
         <Navigation 
           isDarkMode={isDarkMode} 
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}

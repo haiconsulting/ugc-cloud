@@ -16,9 +16,9 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
   const template = templateManager.getTemplate(invoiceData.selectedTemplate || 'default');
   const initialContent = template.render(invoiceData, calculateTotal);
   
-  const isSOW = ((invoiceData.selectedTemplate === 'sow') || 
+  const isContract = ((invoiceData.selectedTemplate === 'contract') || 
                 (invoiceData.selectedTemplate.startsWith('custom-') && 
-                 invoiceData.selectedTemplate.includes('-sow-'))) || false;
+                 invoiceData.selectedTemplate.includes('-contract-'))) || false;
 
   const handleEditorChange = (content) => {
     if (onTemplateChange) {
@@ -35,7 +35,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${isSOW ? 'Statement of Work' : 'Invoice'} #${invoiceData.invoiceNumber}</title>
+    <title>${isContract ? 'Contract' : 'Invoice'} #${invoiceData.invoiceNumber}</title>
     <style>
       body { font-family: Arial, sans-serif; }
       img { max-width: 100%; height: auto; }
@@ -50,7 +50,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${isSOW ? 'SOW' : 'Invoice'}_${invoiceData.invoiceNumber || 'draft'}.html`;
+      a.download = `${isContract ? 'Contract' : 'Invoice'}_${invoiceData.invoiceNumber || 'draft'}.html`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -88,7 +88,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
       });
 
       // Create template name
-      const templateName = `custom-${isSOW ? 'sow' : 'invoice'}-${Date.now()}`;
+      const templateName = `custom-${isContract ? 'contract' : 'invoice'}-${Date.now()}`;
       
       try {
         // Create full HTML document
@@ -98,7 +98,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom ${isSOW ? 'SOW' : 'Invoice'} Template</title>
+    <title>Custom ${isContract ? 'Contract' : 'Invoice'} Template</title>
     <style>
       body { font-family: Arial, sans-serif; }
       img { max-width: 100%; height: auto; }
@@ -111,7 +111,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
 
         // Save to template manager
         await templateManager.addTemplate(templateName, new Blob([fullHtmlContent], { type: 'text/html' }), {
-          type: isSOW ? 'sow' : 'invoice',
+          type: isContract ? 'contract' : 'invoice',
           content: templateContent
         });
 
@@ -152,7 +152,7 @@ const InvoicePreview = ({ invoiceData, onTemplateChange }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
       >
-        {isSOW ? 'Statement of Work Preview' : 'Invoice Preview'}
+        {isContract ? 'Contract Preview' : 'Invoice Preview'}
       </motion.h2>
       <motion.div 
         className="preview-content"

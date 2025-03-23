@@ -15,9 +15,9 @@ class TemplateManager {
       return this.templates.get(name);
     }
     
-    // If it's a SOW template (either built-in or custom), return SOW template
-    if (name === 'sow' || (name && name.includes('-sow-'))) {
-      return this.templates.get('sow');
+    // If it's a Contract template (either built-in or custom), return Contract template
+    if (name === 'contract' || (name && name.includes('-contract-'))) {
+      return this.templates.get('contract');
     }
     
     // Default fallback
@@ -75,8 +75,8 @@ class TemplateManager {
             calculateTotal().toFixed(2)
           );
 
-          // Replace SOW-specific calculations
-          if (config.type === 'sow') {
+          // Replace Contract-specific calculations
+          if (config.type === 'contract') {
             const totalHours = invoiceData.items.reduce(
               (sum, item) => sum + Number(item.quantity), 
               0
