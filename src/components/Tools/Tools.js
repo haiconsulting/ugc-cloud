@@ -4,6 +4,7 @@ import DocumentCreator from '../DocumentCreator/DocumentCreator';
 import TemplateGenerator from '../TemplateGenerator/TemplateGenerator';
 import EmailSender from '../EmailSender/EmailSender';
 import UGCChatbot from '../UGCChatbot/UGCChatbot';
+import NegotiationAssistant from '../NegotiationAssistant/NegotiationAssistant';
 import './Tools.css';
 
 const Tools = () => {
@@ -41,6 +42,12 @@ const Tools = () => {
         >
           UGC Assistant
         </button>
+        <button
+          className={`tab-button ${activeTab === 'negotiation' ? 'active' : ''}`}
+          onClick={() => setActiveTab('negotiation')}
+        >
+          Negotiation Assistant
+        </button>
       </div>
 
       <div className="tools-content">
@@ -48,6 +55,7 @@ const Tools = () => {
         {activeTab === 'generator' && <TemplateGenerator />}
         {activeTab === 'emailer' && <EmailSender />}
         {activeTab === 'chatbot' && <UGCChatbot />}
+        {activeTab === 'negotiation' && <NegotiationAssistant />}
       </div>
     </motion.div>
   );

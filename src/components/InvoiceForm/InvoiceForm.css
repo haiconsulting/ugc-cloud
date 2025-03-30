@@ -28,11 +28,17 @@
 .invoice-details h3 {
   color: #fff;
   margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .light-mode .template-selection h3,
 .light-mode .invoice-details h3 {
   color: #333;
+}
+
+.template-selection {
+  margin-bottom: 2rem;
+  padding: 0;
 }
 
 .field-description {

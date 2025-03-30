@@ -1,0 +1,88 @@
+/* Comprehensive dark mode fixes for navigation */
+
+/* Target the main navigation container */
+.dark-mode .navigation {
+  background: rgba(26, 26, 46, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6) !important;
+  z-index: 1000 !important;
+}
+
+/* Make sure light mode navigation has proper z-index and transparency */
+.light-mode .navigation {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  z-index: 1000 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Target the dark mode logo specifically */
+.dark-mode .nav-brand img.nav-logo {
+  filter: brightness(2) !important;
+  opacity: 1 !important;
+}
+
+/* Make sure logo is visible in light mode */
+.light-mode .nav-brand img.nav-logo {
+  opacity: 1 !important;
+}
+
+/* Target all navigation links - both desktop and mobile */
+.dark-mode .nav-link,
+.dark-mode .mobile-nav-link-container a {
+  color: white !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure light mode links are visible */
+.light-mode .nav-link,
+.light-mode .mobile-nav-link-container a {
+  color: #333 !important;
+  opacity: 1 !important;
+}
+
+/* Target active and hover states */
+.dark-mode .nav-link:hover,
+.dark-mode .nav-link.active,
+.dark-mode .mobile-nav-link-container a:hover,
+.dark-mode .mobile-nav-link-container a.active {
+  color: #00FFF5 !important;
+}
+
+/* Target the active indicator */
+.dark-mode .active-indicator {
+  background-color: #00FFF5 !important;
+  box-shadow: 0 0 8px rgba(0, 255, 245, 0.6) !important;
+}
+
+/* Target hamburger menu bars */
+.dark-mode .hamburger-menu span {
+  background-color: white !important;
+}
+
+/* Target mobile menu background */
+.dark-mode .mobile-nav-links {
+  background: rgba(26, 26, 46, 0.98) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Make sure theme toggle is visible in dark mode */
+.dark-mode .theme-toggle {
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Add a subtle glow to the navigation in dark mode */
+.dark-mode .nav-container {
+  box-shadow: 0 0 15px rgba(0, 255, 245, 0.1) !important;
+}
+
+/* Fix z-index for background components */
+.sunny-clouds-container, 
+.sunny-cloud,
+.sun {
+  z-index: -1 !important;
+} 

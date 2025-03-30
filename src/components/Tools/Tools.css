@@ -3,6 +3,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .tools-tabs {
@@ -10,10 +12,13 @@
   gap: 1rem;
   margin-bottom: 2rem;
   margin-top: 5rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(5px);
 }
 
 .tab-button {
@@ -39,11 +44,14 @@
 }
 
 .tools-content {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   width: 100%;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(5px);
 }
 
 @media (max-width: 768px) {
@@ -59,4 +67,34 @@
     flex: 1 1 calc(50% - 0.5rem);
     text-align: center;
   }
+}
+
+/* Make sure dark mode has appropriate background opacity too */
+.dark-mode .tools-tabs,
+.dark-mode .tools-content {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+/* Ensure tool containers have solid backgrounds to completely hide clouds behind them */
+.tools-tabs, 
+.tools-content {
+  position: relative;
+  z-index: 2;
+  background-color: var(--background-secondary);
+  /* Increase opacity to fully hide clouds behind */
+  background-color: rgba(255, 255, 255, 0.99); /* Light mode */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .tools-tabs,
+.light-mode .tools-content {
+  background-color: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark-mode .tools-tabs,
+.dark-mode .tools-content {
+  background-color: rgba(26, 26, 46, 0.99); /* Dark mode */
+  border: 1px solid rgba(255, 255, 255, 0.05);
 } 

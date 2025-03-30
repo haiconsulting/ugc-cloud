@@ -71,6 +71,7 @@
 .preview-title {
   color: #e0e0e0;
   margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .light-mode .preview-title {
@@ -177,4 +178,27 @@
     width: 100%;
     margin: 0.5rem 0;
   }
+}
+
+/* Update preview buttons to use gradients in dark mode */
+.dark-mode .preview-button,
+.dark-mode .template-button {
+  background: var(--button-gradient);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 255, 245, 0.2);
+  border: none;
+}
+
+.dark-mode .preview-button:hover,
+.dark-mode .template-button:hover {
+  background: var(--hover-gradient);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 12px rgba(0, 255, 245, 0.4);
+  transform: translateY(-3px);
+}
+
+.dark-mode .preview-button:active,
+.dark-mode .template-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

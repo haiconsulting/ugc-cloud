@@ -3,10 +3,32 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
+/* Reduce whitespace by making content area more compact */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.content-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Reduce vertical spacing */
 .hero-section {
-  padding: var(--space-xl) var(--space-md);
+  padding: var(--space-md) var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,8 +36,8 @@
 }
 
 .hero-section h1 {
-  font-size: 3.5rem;
-  margin-bottom: var(--space-md);
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
   max-width: 800px;
   color: var(--text-primary);
   font-weight: var(--font-weight-bold);
@@ -25,14 +47,14 @@
 
 .hero-description {
   max-width: 800px;
-  margin: 0 auto var(--space-lg);
-  font-size: 1.25rem;
-  line-height: 1.6;
+  margin: 0 auto var(--space-md);
+  font-size: 1.1rem;
+  line-height: 1.5;
   color: var(--text-secondary);
 }
 
 .features-section {
-  padding: var(--space-xl) var(--space-md);
+  padding: var(--space-md) var(--space-md);
 }
 
 .features-grid {
@@ -46,8 +68,8 @@
 .feature-card {
   padding: var(--space-md);
   border-radius: 12px;
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: var(--card-border);
   height: 100%;
@@ -58,7 +80,7 @@
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .feature-card h3 {
@@ -105,4 +127,261 @@
   .testimonials-section {
     padding: var(--space-lg) var(--space-xs);
   }
+}
+
+.cloud-text {
+  position: relative;
+  isolation: isolate;
+}
+
+.cloud-text::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -10px;
+  background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='cloud-pattern' patternUnits='userSpaceOnUse' width='50' height='50' patternTransform='scale(2) rotate(0)'%3E%3Cpath d='M25,10 C17,10 10,17 10,25 C10,33 17,40 25,40 C33,40 40,33 40,25 C40,17 33,10 25,10 Z' fill='white' fill-opacity='0.8'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%' height='100%' fill='url(%23cloud-pattern)'/%3E%3C/svg%3E");
+  border-radius: 50px;
+  z-index: -1;
+  filter: blur(4px);
+  opacity: 0.8;
+}
+
+.dark-mode .cloud-text::before {
+  opacity: 0;
+  display: none;
+}
+
+.cta-button-container {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-button {
+  font-size: 1.125rem;
+  padding: 1rem 2.5rem;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+/* In dark mode */
+.dark-mode .cta-button {
+  background: var(--button-gradient);
+  color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), var(--subtle-glow);
+}
+
+.dark-mode .cta-button:active {
+  transform: translateY(-2px);
+}
+
+/* In light mode */
+.light-mode .cta-button {
+  background: var(--button-gradient);
+  color: var(--navy-blue);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
+.light-mode .cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .cta-button:active {
+  transform: translateY(-2px);
+}
+
+/* Add ripple effect on click */
+.cta-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.cta-button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Enhance mobile responsiveness */
+@media (max-width: 768px) {
+  .cta-button {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+}
+
+/* Cloud Container Styles */
+.background-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Ensure all content sections maintain proper z-index */
+.hero-section,
+.features-section,
+.testimonials-section,
+.cta-button-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Improved cloud background visibility in dark mode */
+.dark-mode .cloud {
+  opacity: 0.1;
+}
+
+.dark-mode .lightning {
+  opacity: 0;
+}
+
+.dark-mode .lightning.active {
+  opacity: 0.6;
+}
+
+/* Improved sun visibility in light mode */
+.light-mode .sun {
+  opacity: 0.6;
+}
+
+.light-mode .sunny-cloud {
+  opacity: 0.2;
+}
+
+/* Add a subtle gradient background to enhance cloud visibility */
+.light-mode .welcome-container {
+  background: linear-gradient(to bottom, rgba(255, 235, 245, 0.7), rgba(229, 236, 255, 0.7));
+  position: relative;
+  overflow: hidden;
+}
+
+.light-mode .welcome-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(255, 214, 232, 0.4), transparent 80%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Improve cloud visibility */
+.light-mode .background-clouds {
+  opacity: 0.6;
+}
+
+.light-mode .cloud {
+  opacity: 0.8;
+}
+
+/* Fix cloud layers to make them more visible */
+.cloud-layer {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-repeat: repeat-x;
+  z-index: -1;
+}
+
+.light-mode .cloud-layer:nth-child(1) {
+  background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M280,200 C280,140 240,100 180,100 C140,100 100,120 80,160 C40,160 0,180 0,220 C0,260 40,280 80,280 L280,280 C320,280 360,260 360,220 C360,180 320,160 280,200 Z' fill='%23FFD6E8' fill-opacity='0.8'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 60s linear infinite;
+  background-size: 400px 400px;
+  top: 10%;
+  opacity: 0.7;
+}
+
+.light-mode .cloud-layer:nth-child(2) {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M140,100 C140,70 120,50 90,50 C70,50 50,60 40,80 C20,80 0,90 0,110 C0,130 20,140 40,140 L140,140 C160,140 180,130 180,110 C180,90 160,80 140,100 Z' fill='%23E8E6FF' fill-opacity='0.8'/%3E%3C/svg%3E");
+  animation: moveRightToLeft 45s linear infinite;
+  background-size: 200px 200px;
+  top: 40%;
+  opacity: 0.7;
+}
+
+.light-mode .cloud-layer:nth-child(3) {
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M210,150 C210,105 180,75 135,75 C105,75 75,90 60,120 C30,120 0,135 0,165 C0,195 30,210 60,210 L210,210 C240,210 270,195 270,165 C270,135 240,120 210,150 Z' fill='%23FFD6E8' fill-opacity='0.8'/%3E%3C/svg%3E");
+  animation: moveLeftToRight 75s linear infinite;
+  background-size: 300px 300px;
+  top: 70%;
+  opacity: 0.7;
+}
+
+/* Faster animation for better visibility */
+@keyframes moveLeftToRight {
+  from {
+    background-position: -400px 0;
+  }
+  to {
+    background-position: 100vw 0;
+  }
+}
+
+@keyframes moveRightToLeft {
+  from {
+    background-position: 100vw 0;
+  }
+  to {
+    background-position: -400px 0;
+  }
+}
+
+/* Reduce whitespace on mobile */
+@media (max-width: 768px) {
+  .section-container {
+    padding: 0.5rem;
+  }
+  
+  .content-container {
+    padding: 1rem;
+  }
+  
+  .hero-section {
+    padding: var(--space-sm) var(--space-xs);
+  }
+  
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+  
+  .features-section {
+    padding: var(--space-sm) var(--space-xs);
+  }
+}
+
+.dark-mode .welcome-container {
+  background: linear-gradient(to bottom, rgba(13, 27, 42, 0.95), rgba(49, 34, 68, 0.95));
 } 

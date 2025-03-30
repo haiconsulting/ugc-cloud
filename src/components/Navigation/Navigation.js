@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Navigation.css';
+import './DarkModeNav.css';
+import './NavigationFix.css';
 
 const Navigation = ({ isDarkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,12 +75,33 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
     dark: { rotate: 180, backgroundColor: "rgba(100, 100, 255, 0.15)" }
   };
 
+  // Define direct styles for dark mode navigation
+  const darkModeStyles = {
+    navLink: {
+      color: 'white',
+      textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+      fontWeight: 'bold'
+    },
+    navContainer: {
+      background: 'rgba(26, 26, 46, 0.95)',
+      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.6)'
+    },
+    navLogo: {
+      filter: 'brightness(2) contrast(1.2)'
+    }
+  };
+
+  // Log for debugging
+  console.log("Current dark mode state:", isDarkMode);
+
   return (
     <motion.nav 
       className={`navigation ${visible ? '' : 'nav-hidden'}`}
       variants={navVariants}
       initial="hidden"
       animate="visible"
+      style={isDarkMode ? darkModeStyles.navContainer : {}}
     >
       <div className="nav-container">
         <div className="nav-brand">
@@ -89,6 +112,7 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
                 : `${process.env.PUBLIC_URL}/logo.png`} 
               alt="Logo"
               className="nav-logo"
+              style={isDarkMode ? darkModeStyles.navLogo : {}}
             />
           </Link>
         </div>
@@ -105,6 +129,7 @@ const Navigation = ({ isDarkMode, toggleDarkMode }) => {
               <Link 
                 to={`/${item}`} 
                 className={`nav-link ${location.pathname === `/${item}` ? 'active' : ''}`}
+                style={isDarkMode ? darkModeStyles.navLink : {}}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
                 {location.pathname === `/${item}` && (

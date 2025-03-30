@@ -37,6 +37,7 @@ function Navigation({ toggleDarkMode, isDarkMode }) {
             {isMenuOpen && (
                 <div className="mobile-menu">
                     <Link to="/tools">Tools</Link>
+                    <Link to="/negotiation-assistant">Negotiation Assistant</Link>
                     <Link to="/community">Community</Link>
                     <Link to="/resources">Resources</Link>
                 </div>

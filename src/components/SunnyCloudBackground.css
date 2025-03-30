@@ -48,32 +48,25 @@
 .sunny-cloud:nth-child(1) {
   top: 15%;
   right: 10%;
-  animation-delay: 0s;
-  transform: scale(0.8);
+  animation: sunnyCloudPath1 120s infinite ease-in-out;
 }
 
 .sunny-cloud:nth-child(2) {
   top: 50%;
   left: -5%;
-  animation-delay: 15s;
-  transform: scale(1.2);
-  opacity: 0.1;
+  animation: sunnyCloudPath2 130s infinite ease-in-out;
 }
 
 .sunny-cloud:nth-child(3) {
   top: 25%;
   left: 25%;
-  animation-delay: 30s;
-  transform: scale(0.7);
-  opacity: 0.12;
+  animation: sunnyCloudPath3 140s infinite ease-in-out;
 }
 
 .sunny-cloud:nth-child(4) {
   bottom: 10%;
   right: 5%;
-  animation-delay: 22s;
-  transform: scale(0.9);
-  opacity: 0.08;
+  animation: sunnyCloudPath4 125s infinite ease-in-out;
 }
 
 /* Stylized Sun */
@@ -113,4 +106,33 @@
 @keyframes pulse-gentle {
   0%, 100% { transform: scale(1); opacity: 0.4; }
   50% { transform: scale(1.05); opacity: 0.5; }
+}
+
+/* Custom paths for sunny clouds */
+@keyframes sunnyCloudPath1 {
+  0% { transform: translateX(0%) scale(0.8); }
+  30% { transform: translateX(-15%) translateY(5%) scale(0.8); }
+  70% { transform: translateX(-40%) translateY(10%) scale(0.8); }
+  100% { transform: translateX(0%) scale(0.8); }
+}
+
+@keyframes sunnyCloudPath2 {
+  0% { transform: translateX(0%) scale(1.2); }
+  40% { transform: translateX(20%) translateY(-15%) scale(1.2); }
+  80% { transform: translateX(60%) translateY(-5%) scale(1.2); }
+  100% { transform: translateX(0%) scale(1.2); }
+}
+
+@keyframes sunnyCloudPath3 {
+  0% { transform: translateX(0%) scale(0.7); }
+  35% { transform: translateX(25%) translateY(10%) scale(0.7); }
+  75% { transform: translateX(-15%) translateY(15%) scale(0.7); }
+  100% { transform: translateX(0%) scale(0.7); }
+}
+
+@keyframes sunnyCloudPath4 {
+  0% { transform: translateX(0%) scale(0.9); }
+  25% { transform: translateX(-30%) translateY(-5%) scale(0.9); }
+  65% { transform: translateX(-50%) translateY(-15%) scale(0.9); }
+  100% { transform: translateX(0%) scale(0.9); }
 } 

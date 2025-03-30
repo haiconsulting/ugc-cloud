@@ -51,16 +51,30 @@ const WelcomePage = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <div className="cloud-filter-container">
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <filter id="cloud-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" seed="1" />
+            <feDisplacementMap in="SourceGraphic" scale="5" />
+            <feGaussianBlur stdDeviation="3.5" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="5" intercept="-1.6" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
+      </div>
+      
       <div className="section-container primary">
         <div className="content-container">
           <div className="hero-section">
-            <motion.h1
+            <motion.div
+              className="cloud-text-container"
               initial={{ y: -20 }}
               animate={{ y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Welcome to UGC Cloud
-            </motion.h1>
+              <h1 className="cloud-text">Welcome to UGC Cloud</h1>
+            </motion.div>
             
             <motion.div 
               className="hero-description"
@@ -79,6 +93,20 @@ const WelcomePage = () => {
                 UGC Cloud makes it easy to discover, manage, and integrate user-generated 
                 content into your marketing strategy.
               </p>
+              
+              <motion.div
+                className="cta-button-container"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                <button 
+                  className="cta-button get-started-btn" 
+                  onClick={handleGetStarted}
+                >
+                  Get Started Now
+                </button>
+              </motion.div>
             </motion.div>
           </div>
         </div>

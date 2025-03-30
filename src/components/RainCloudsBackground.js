@@ -3,43 +3,50 @@ import './RainCloudsBackground.css';
 
 function RainCloudsBackground() {
   return (
-    <div className="clouds-container">
-      <div className="cloud">
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
+    <>
+      <div className="clouds-container">
+        <div className="cloud">
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+        </div>
+        <div className="cloud">
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+        </div>
+        <div className="cloud">
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+        </div>
+        <div className="cloud">
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+        </div>
+        <div className="cloud">
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+          <div className="rain"></div>
+        </div>
       </div>
-      <div className="cloud">
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
+      <div className="lightning-container">
+        <div className="lightning"></div>
+        <div className="lightning"></div>
+        <div className="lightning"></div>
       </div>
-      <div className="cloud">
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-      </div>
-      <div className="cloud">
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-      </div>
-      <div className="cloud">
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-        <div className="rain"></div>
-      </div>
-    </div>
+    </>
   );
 }
 
