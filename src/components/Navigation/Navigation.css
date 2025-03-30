@@ -85,8 +85,20 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--button-gradient);
   border-radius: 2px;
+}
+
+/* Add specific styles for light mode active indicator */
+.light-mode .active-indicator {
+  background-color: #add8e6; /* Pastel blue */
+  height: 4px;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(173, 216, 230, 0.6); /* Soft glow effect */
+}
+
+/* Keep the gradient only for dark mode */
+.dark-mode .active-indicator {
+  background: var(--button-gradient);
 }
 
 .nav-controls {

@@ -1,11 +1,16 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useContext } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import './WelcomePage.css';
 
 const WelcomePage = () => {
   const navigate = useNavigate();
-
+  const { scrollY } = useScroll();
+  
+  // Create parallax effect values for content elements
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.2]);
+  const heroY = useTransform(scrollY, [0, 300], [0, 100]);
+  
   const sampleResources = [
     {
       title: "Professional Email Pack",
@@ -65,7 +70,10 @@ const WelcomePage = () => {
       </div>
       
       <div className="section-container primary">
-        <div className="content-container">
+        <motion.div 
+          className="content-container glass-morphism"
+          style={{ opacity: heroOpacity, y: heroY }}
+        >
           <div className="hero-section">
             <motion.div
               className="cloud-text-container"
@@ -109,11 +117,11 @@ const WelcomePage = () => {
               </motion.div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <div className="section-container secondary">
-        <div className="content-container">
+        <div className="content-container glass-morphism">
           <div className="features-section">
             <h2 className="section-heading">Platform Features</h2>
             <div className="spacer"></div>
@@ -142,7 +150,7 @@ const WelcomePage = () => {
       </div>
       
       <div className="section-container accent">
-        <div className="content-container">
+        <div className="content-container glass-morphism">
           <div className="testimonials-section">
             <h2 className="testimonials-heading">What Creators Are Saying</h2>
             <div className="divider"></div>

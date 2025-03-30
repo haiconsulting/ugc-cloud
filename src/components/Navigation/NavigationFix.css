@@ -43,6 +43,22 @@
   opacity: 1 !important;
 }
 
+/* Style active and hover states for light mode */
+.light-mode .nav-link:hover,
+.light-mode .nav-link.active,
+.light-mode .mobile-nav-link-container a:hover,
+.light-mode .mobile-nav-link-container a.active {
+  color: #2196F3 !important;
+}
+
+/* Apply pastel blue style to light mode active indicator */
+.light-mode .active-indicator {
+  background-color: #add8e6 !important; /* Pastel blue */
+  box-shadow: 0 0 6px rgba(173, 216, 230, 0.6) !important; /* Soft glow effect */
+  height: 4px !important;
+  border-radius: 4px !important;
+}
+
 /* Target active and hover states */
 .dark-mode .nav-link:hover,
 .dark-mode .nav-link.active,
