@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NegotiationAssistant.css';
+import UgcRateCalculator from './UgcRateCalculator';
 
 const NegotiationAssistant = () => {
   const [messages, setMessages] = useState([]);
@@ -40,8 +41,7 @@ const NegotiationAssistant = () => {
       
       <div className="negotiation-features">
         <div className="feature-card">
-          <h3>Rate Calculation</h3>
-          <p>Calculate fair rates based on platform, engagement, and deliverable type.</p>
+          <UgcRateCalculator />
         </div>
         
         <div className="feature-card">

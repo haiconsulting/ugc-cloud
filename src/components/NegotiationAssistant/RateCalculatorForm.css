@@ -1,0 +1,76 @@
+.rate-calculator-form {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px; /* Add some space below the form */
+}
+
+.rate-calculator-form h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 15px; /* Spacing between grid items */
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.calculated-rate {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e7f3ff;
+  border: 1px solid #b3d7ff;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.calculated-rate h4 {
+  margin: 0 0 5px 0;
+  color: #0056b3;
+}
+
+.calculated-rate p {
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #004085;
+}
+
+.disclaimer {
+    font-size: 0.8em;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+} 
