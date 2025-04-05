@@ -39,4 +39,125 @@
 .feature-card p {
   color: var(--text-color, #666666);
   line-height: 1.5;
+}
+
+/* Chat Interface Styles */
+.chat-interface {
+  margin-top: var(--space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Adjusted for dark/light mode consistency */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Or adjust as needed */
+  background: var(--background-secondary); /* Use secondary background */
+  box-shadow: var(--shadow-md);
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.message {
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message p {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: var(--line-height-normal);
+}
+
+.message.user {
+  background: var(--primary-blue);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: var(--radius-sm); /* Slight visual tweak */
+}
+
+.message.assistant {
+  background: var(--dark-bg-secondary); /* Consistent with dark mode bg */
+  color: var(--dark-text-primary);
+  align-self: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: var(--radius-sm); /* Slight visual tweak */
+}
+
+/* Style adjustments for light mode */
+.light-mode .message.assistant {
+  background: var(--light-bg-secondary);
+  color: var(--light-text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .chat-interface {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chat-input-area {
+  display: flex;
+  padding: var(--space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--background-secondary); /* Consistent background */
+}
+
+.light-mode .chat-input-area {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chat-input-area textarea {
+  flex-grow: 1;
+  margin-right: var(--space-sm);
+  resize: none; /* Prevent manual resizing */
+  font-size: var(--text-base);
+  padding: var(--space-xs) var(--space-sm);
+  /* Use existing input styles from index.css */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+}
+
+.light-mode .chat-input-area textarea {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.chat-input-area textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-focus);
+}
+
+.chat-input-area button {
+  padding: var(--space-xs) var(--space-md);
+  border: none;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition-normal);
+}
+
+.chat-input-area button:hover {
+  opacity: 0.9;
+  box-shadow: var(--shadow-md);
+}
+
+.light-mode .chat-input-area button {
+  background: var(--gradient-light);
+  color: var(--light-text-primary);
+}
+
+.light-mode .chat-input-area button:hover {
+  background: var(--light-cta);
 } 
