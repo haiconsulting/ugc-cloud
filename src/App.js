@@ -33,7 +33,7 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <Router basename="/ugc-cloud">
+    <Router>
       <motion.div 
         className={`App ${isDarkMode ? 'dark-mode' : 'light-mode'}`}
         initial={{ opacity: 0 }}
