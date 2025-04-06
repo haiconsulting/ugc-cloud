@@ -162,7 +162,7 @@ const Resources = () => {
               className="backup-btn"
               onClick={handleBackup}
             >
-              Backup Data
+              <i className="fas fa-save"></i> Backup Data
             </button>
             <input
               type="file"
@@ -172,13 +172,13 @@ const Resources = () => {
               id="import-json"
             />
             <label htmlFor="import-json" className="import-btn">
-              Import Data
+              <i className="fas fa-file-import"></i> Import Data
             </label>
             <button 
               className="upload-resource-btn"
               onClick={() => setShowUploadModal(true)}
             >
-              Upload Resource
+              <i className="fas fa-upload"></i> Upload Resource
             </button>
           </div>
         </div>

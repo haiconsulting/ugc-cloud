@@ -1,3 +1,235 @@
+/* Remove or comment out old .tools-tabs and .tab-button styles */
+/*
+.tools-tabs { ... }
+.tab-button { ... }
+.tab-button.active { ... }
+.tab-button:hover:not(.active) { ... }
+*/
+
+/* Main layout container */
+.tools-layout-container {
+  display: flex;
+  width: 100%;
+  /* max-width: 1600px; /* Remove or adjust if sidebar is fixed */
+  margin: 0; /* Remove margin if sidebar is fixed */
+  padding: 0;
+  min-height: 100vh; /* Use full viewport height */
+  position: relative;
+  padding-top: 60px; /* Add padding to account for fixed Navigation */
+  box-sizing: border-box;
+}
+
+/* Vertical Fixed Sidebar Styles */
+.tools-sidebar {
+  width: 65px; /* Width of the sidebar */
+  height: calc(100vh - 60px); /* Full viewport height minus nav */
+  position: fixed; /* Keep it fixed during scroll */
+  left: 0;
+  top: 60px; /* Position below the fixed Navigation */
+  background-color: #ffffff; /* Sidebar background */
+  border-right: 1px solid #e0e0e0; /* Subtle border */
+  display: flex;
+  flex-direction: column; /* Stack icons vertically */
+  align-items: center; /* Center icons horizontally */
+  padding-top: 20px; /* Space at the top */
+  z-index: 999; /* Below nav, above content */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Sidebar Icon Button Styles */
+.sidebar-icon {
+  font-size: 26px; /* Size of the emojis */
+  padding: 12px 0; /* Vertical padding around icons */
+  margin-bottom: 8px; /* Space between icons */
+  cursor: pointer;
+  text-decoration: none;
+  color: #555; /* Icon color */
+  position: relative; /* Needed for positioning the tooltip */
+  display: block;
+  width: 100%; /* Make clickable area full width */
+  text-align: center;
+  border: none; /* Remove default button border */
+  background: transparent; /* Ensure transparent background */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transitions */
+  line-height: 1;
+}
+
+.sidebar-icon:hover {
+  background-color: #f0f0f0; /* Slight background change on hover */
+  color: #000; /* Darken icon color on hover */
+}
+
+.sidebar-icon.active { /* Style for the currently selected icon */
+  background-color: #e0e0e0;
+  color: var(--primary-blue); /* Use theme color */
+}
+
+/* Tooltip Styling */
+.sidebar-icon::after {
+  content: attr(title); /* Use the title attribute text (already set in JS) */
+  position: absolute;
+  left: 105%; /* Position tooltip to the right of the icon */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Dark tooltip background */
+  color: #fff; /* White text */
+  padding: 6px 12px; /* Padding inside tooltip */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 13px; /* Tooltip font size */
+  white-space: nowrap; /* Keep tooltip text on one line */
+  visibility: hidden; /* Hide by default */
+  opacity: 0; /* Start fully transparent */
+  transition: opacity 0.2s ease, visibility 0.2s ease; /* Smooth fade effect */
+  z-index: 1001; /* Ensure tooltip is above everything */
+  pointer-events: none; /* Prevent tooltip from interfering with mouse */
+}
+
+/* Show tooltip on hover */
+.sidebar-icon:hover::after {
+  visibility: visible; /* Make it visible */
+  opacity: 1; /* Make it fully opaque */
+}
+
+/* Content Area Styles */
+.tools-content-area {
+  margin-left: 65px; /* Must match sidebar width */
+  padding: 20px 30px; /* Padding for content area */
+  width: calc(100% - 65px); /* Take up remaining width */
+  overflow-y: auto; /* Allow content scrolling if needed */
+  background-color: #f8f9fa; /* Light background for content */
+  min-height: calc(100vh - 60px); /* Ensure it fills height */
+  transition: background-color 0.3s ease;
+  position: relative; /* Needed for potential absolute children */
+  z-index: 1; /* Behind sidebar */
+}
+
+/* Placeholder styles */
+.tool-pane-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-secondary);
+  min-height: 300px; /* Give placeholder some minimum height */
+}
+
+/* Style for the actual tool panes when loaded */
+.tools-content-area > * { /* Target direct children (the tool components) */
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+   margin-bottom: 20px; /* Add space if multiple elements appear */
+   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* --- Dark Mode Adjustments --- */
+.dark-mode .tools-sidebar {
+  background-color: #1a1a2e; /* Dark sidebar background */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .sidebar-icon {
+  color: #ccc; /* Lighter default icon color */
+}
+
+.dark-mode .sidebar-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.dark-mode .sidebar-icon.active {
+  background-color: rgba(0, 255, 245, 0.15); /* Use accent color theme */
+  color: var(--dark-accent);
+}
+
+/* Dark mode tooltip */
+.dark-mode .sidebar-icon::after {
+   background-color: rgba(230, 230, 230, 0.9); /* Lighter tooltip background */
+   color: #1a1a2e; /* Dark text */
+   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.dark-mode .tools-content-area {
+  background-color: #10101a; /* Darker page background */
+}
+
+.dark-mode .tools-content-area > * { /* Dark mode for tool panes */
+   background-color: #1f1f30; /* Darker card background */
+   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .tool-pane-placeholder {
+  color: #888;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .tools-layout-container {
+    padding-top: 50px; /* Adjust for potentially smaller mobile nav */
+    flex-direction: column; /* Stack layout */
+  }
+
+  .tools-sidebar {
+    flex-direction: row; /* Icons side-by-side */
+    width: 100%;
+    height: 55px; /* Fixed height for horizontal bar */
+    position: fixed; /* Keep it fixed at the top */
+    top: 50px; /* Position below the main nav */
+    left: 0;
+    padding: 0 10px; /* Horizontal padding */
+    justify-content: space-around; /* Distribute icons */
+    border-right: none; /* Remove right border */
+    border-bottom: 1px solid #e0e0e0; /* Add bottom border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark-mode .tools-sidebar {
+     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar-icon {
+    font-size: 22px; /* Slightly smaller icons */
+    padding: 0 10px; /* Horizontal padding */
+    margin-bottom: 0; /* Remove bottom margin */
+    height: 100%; /* Fill the bar height */
+    display: flex; /* Use flex to center */
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Auto width based on content/padding */
+    flex-grow: 1; /* Allow icons to take space */
+  }
+
+   .sidebar-icon.active {
+     background-color: transparent; /* Remove background */
+     color: var(--primary-blue); /* Active color */
+     border-bottom: 3px solid var(--primary-blue); /* Indicator line */
+     border-radius: 0; /* Remove rounding */
+   }
+
+   .dark-mode .sidebar-icon.active {
+     color: var(--dark-accent);
+     border-bottom-color: var(--dark-accent);
+   }
+
+  /* Hide tooltips on mobile/touch devices (hover doesn't work well) */
+  .sidebar-icon::after {
+    display: none;
+  }
+
+  .tools-content-area {
+    margin-left: 0; /* Remove margin */
+    width: 100%; /* Full width */
+    padding: 15px; /* Reduce padding */
+    margin-top: 55px; /* Space below the fixed sidebar */
+    min-height: calc(100vh - 50px - 55px); /* Adjust min-height */
+  }
+}
+
 .tools-container {
   width: 100%;
   max-width: 1400px;
@@ -52,38 +284,63 @@
   position: relative;
   z-index: 2;
   backdrop-filter: blur(5px);
+  min-height: 50vh; /* Give content area some minimum height */
 }
 
 @media (max-width: 768px) {
   .tools-container {
     padding: 1rem;
+    margin-top: 4rem; /* Adjust margin for mobile */
   }
-  
+
   .tools-tabs {
     flex-wrap: wrap;
+    padding: 1rem;
+    margin-top: 1rem; /* Reduce top margin */
   }
-  
+
   .tab-button {
-    flex: 1 1 calc(50% - 0.5rem);
+    flex: 1 1 calc(50% - 0.5rem); /* Adjust flex basis */
     text-align: center;
+    font-size: 0.9rem; /* Slightly smaller font */
+    padding: 0.6rem 1rem; /* Adjust padding */
+  }
+
+  .tools-content {
+    padding: 1.5rem;
   }
 }
 
-/* Make sure dark mode has appropriate background opacity too */
+/* Dark Mode Adjustments */
 .dark-mode .tools-tabs,
 .dark-mode .tools-content {
   background: rgba(26, 26, 46, 0.95);
   backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .tab-button {
+  color: #ccc;
+}
+
+.dark-mode .tab-button.active {
+  background: var(--accent-color);
+  color: #1a1a2e;
+}
+
+.dark-mode .tab-button:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 /* Ensure tool containers have solid backgrounds to completely hide clouds behind them */
-.tools-tabs, 
+.tools-tabs,
 .tools-content {
   position: relative;
   z-index: 2;
-  background-color: var(--background-secondary);
+  /* background-color: var(--background-secondary); */ /* Commented out as rgba is used */
   /* Increase opacity to fully hide clouds behind */
-  background-color: rgba(255, 255, 255, 0.99); /* Light mode */
+  /* background-color: rgba(255, 255, 255, 0.99); */ /* Light mode - Handled by specific rules */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -93,8 +350,11 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+/* Dark mode already handled above */
+/*
 .dark-mode .tools-tabs,
 .dark-mode .tools-content {
-  background-color: rgba(26, 26, 46, 0.99); /* Dark mode */
+  background-color: rgba(26, 26, 46, 0.98);
   border: 1px solid rgba(255, 255, 255, 0.05);
-} 
+}
+*/ 
